@@ -632,13 +632,6 @@ public class Distribute extends AbstractAppCenterService {
     private synchronized void resumeDistributeWorkflow() {
         if (mPackageInfo != null && mForegroundActivity != null && !mWorkflowCompleted && isInstanceEnabled()) {
 
-            /* Don't go any further it this is a debug app. */
-            if ((mContext.getApplicationInfo().flags & FLAG_DEBUGGABLE) == FLAG_DEBUGGABLE) {
-                AppCenterLog.info(LOG_TAG, "Not checking in app updates in debug.");
-                mWorkflowCompleted = true;
-                return;
-            }
-
             /* Don't go any further if the app was installed from an app store. */
             if (InstallerUtils.isInstalledFromAppStore(LOG_TAG, mContext)) {
                 AppCenterLog.info(LOG_TAG, "Not checking in app updates as installed from a store.");
